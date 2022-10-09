@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PrisonManagementWebApp.Models.Prisoner>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genger)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FingetPrint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactRelation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactContact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeServeStarts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeServeEnds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CrimeCommitter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CrimeDetails)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genger)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FingetPrint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactRelation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeServeStarts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeServeEnds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CrimeCommitter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CrimeDetails)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
