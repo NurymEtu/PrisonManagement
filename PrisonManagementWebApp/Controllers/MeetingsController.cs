@@ -10,85 +10,85 @@ using PrisonManagementWebApp.Models;
 
 namespace PrisonManagementWebApp.Controllers
 {
-    public class GuardsController : Controller
+    public class MeetingsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public GuardsController(ApplicationDbContext context)
+        public MeetingsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Guards
+        // GET: Meetings
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Guards.ToListAsync());
+              return View(await _context.Meetings.ToListAsync());
         }
 
-        // GET: Guards/Details/5
+        // GET: Meetings/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Guards == null)
+            if (id == null || _context.Meetings == null)
             {
                 return NotFound();
             }
 
-            var guard = await _context.Guards
+            var meeting = await _context.Meetings
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (guard == null)
+            if (meeting == null)
             {
                 return NotFound();
             }
 
-            return View(guard);
+            return View(meeting);
         }
 
-        // GET: Guards/Create
+        // GET: Meetings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Guards/Create
+        // POST: Meetings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Image,Genger,Id,CreationDateTime,UpdatedDateTime")] Guard guard)
+        public async Task<IActionResult> Create([Bind("MeetingTime,Id,CreationDateTime,UpdatedDateTime")] Meeting meeting)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(guard);
+                _context.Add(meeting);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(guard);
+            return View(meeting);
         }
 
-        // GET: Guards/Edit/5
+        // GET: Meetings/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Guards == null)
+            if (id == null || _context.Meetings == null)
             {
                 return NotFound();
             }
 
-            var guard = await _context.Guards.FindAsync(id);
-            if (guard == null)
+            var meeting = await _context.Meetings.FindAsync(id);
+            if (meeting == null)
             {
                 return NotFound();
             }
-            return View(guard);
+            return View(meeting);
         }
 
-        // POST: Guards/Edit/5
+        // POST: Meetings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Image,Genger,Id,CreationDateTime,UpdatedDateTime")] Guard guard)
+        public async Task<IActionResult> Edit(Guid id, [Bind("MeetingTime,Id,CreationDateTime,UpdatedDateTime")] Meeting meeting)
         {
-            if (id != guard.Id)
+            if (id != meeting.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace PrisonManagementWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(guard);
+                    _context.Update(meeting);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GuardExists(guard.Id))
+                    if (!MeetingExists(meeting.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace PrisonManagementWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(guard);
+            return View(meeting);
         }
 
-        // GET: Guards/Delete/5
+        // GET: Meetings/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Guards == null)
+            if (id == null || _context.Meetings == null)
             {
                 return NotFound();
             }
 
-            var guard = await _context.Guards
+            var meeting = await _context.Meetings
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (guard == null)
+            if (meeting == null)
             {
                 return NotFound();
             }
 
-            return View(guard);
+            return View(meeting);
         }
 
-        // POST: Guards/Delete/5
+        // POST: Meetings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Guards == null)
+            if (_context.Meetings == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Guards'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Meetings'  is null.");
             }
-            var guard = await _context.Guards.FindAsync(id);
-            if (guard != null)
+            var meeting = await _context.Meetings.FindAsync(id);
+            if (meeting != null)
             {
-                _context.Guards.Remove(guard);
+                _context.Meetings.Remove(meeting);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GuardExists(Guid id)
+        private bool MeetingExists(Guid id)
         {
-          return _context.Guards.Any(e => e.Id == id);
+          return _context.Meetings.Any(e => e.Id == id);
         }
     }
 }

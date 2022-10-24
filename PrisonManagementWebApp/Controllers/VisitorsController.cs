@@ -26,7 +26,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Visitors/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Visitors == null)
             {
@@ -66,7 +66,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Visitors/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Visitors == null)
             {
@@ -86,7 +86,7 @@ namespace PrisonManagementWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Genger,Image,Id,CreationDateTime,UpdatedDateTime")] Visitor visitor)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Genger,Image,Id,CreationDateTime,UpdatedDateTime")] Visitor visitor)
         {
             if (id != visitor.Id)
             {
@@ -117,7 +117,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Visitors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Visitors == null)
             {
@@ -137,7 +137,7 @@ namespace PrisonManagementWebApp.Controllers
         // POST: Visitors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Visitors == null)
             {
@@ -153,7 +153,7 @@ namespace PrisonManagementWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VisitorExists(int id)
+        private bool VisitorExists(Guid id)
         {
           return _context.Visitors.Any(e => e.Id == id);
         }

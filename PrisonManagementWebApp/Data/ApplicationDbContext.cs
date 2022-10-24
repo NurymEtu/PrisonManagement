@@ -11,10 +11,12 @@ namespace PrisonManagementWebApp.Data
         {
             Database.EnsureCreated();
         }
-        public DbSet<Prison> Prisons { get; set; }
+        public DbSet<Cell> Cells { get; set; }
         public DbSet<Prisoner> Prisoners { get; set; }
-        public DbSet<Supervisor> Supervisors { get; set; }
         public DbSet<Guard> Guards { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
+        public DbSet<CameraLive> CameraLives { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+
     }
 }

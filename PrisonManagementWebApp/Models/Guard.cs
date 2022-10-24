@@ -3,8 +3,9 @@
     public class Guard : Entity
     {
         public string Name { get; set; }
-        public string Image { get;set;}= "https://media.istockphoto.com/photos/brave-jail-guard-looking-at-camera-standing-near-cell-dangerous-picture-id1167840118";
-        public string Genger { get; set; }
+        public string Image { get; set; } = "https://media.istockphoto.com/photos/brave-jail-guard-looking-at-camera-standing-near-cell-dangerous-picture-id1167840118";
+        public string Genger { get; set; }="Мужчина";
+        public DateTime Birthday { get; set; } = new DateTime(2000, 1, 1);
 
     }
 }

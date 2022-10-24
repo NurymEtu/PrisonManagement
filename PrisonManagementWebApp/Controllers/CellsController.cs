@@ -10,85 +10,86 @@ using PrisonManagementWebApp.Models;
 
 namespace PrisonManagementWebApp.Controllers
 {
-    public class PrisonsController : Controller
+    public class CellsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PrisonsController(ApplicationDbContext context)
+        public CellsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Prisons
+        // GET: Cells
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Prisons.ToListAsync());
+            var list = await _context.Cells.Include(x => x.Prisoners).Include(x => x.Guards).Include(x => x.CameraLives).ToListAsync();
+            return View(list);
         }
 
-        // GET: Prisons/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Cells/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Prisons == null)
+            if (id == null || _context.Cells == null)
             {
                 return NotFound();
             }
 
-            var prison = await _context.Prisons
+            var cell = await _context.Cells.Include(x => x.CameraLives).Include(x => x.Prisoners).Include(x => x.Guards)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (prison == null)
+            if (cell == null)
             {
                 return NotFound();
             }
 
-            return View(prison);
+            return View(cell);
         }
 
-        // GET: Prisons/Create
+        // GET: Cells/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Prisons/Create
+        // POST: Cells/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Number,Capacity,Id,CreationDateTime,UpdatedDateTime")] Prison prison)
+        public async Task<IActionResult> Create([Bind("CellNumber,Number,Capacity,Id,CreationDateTime,UpdatedDateTime")] Cell cell)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(prison);
+                _context.Add(cell);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(prison);
+            return View(cell);
         }
 
-        // GET: Prisons/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Cells/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Prisons == null)
+            if (id == null || _context.Cells == null)
             {
                 return NotFound();
             }
 
-            var prison = await _context.Prisons.FindAsync(id);
-            if (prison == null)
+            var cell = await _context.Cells.FindAsync(id);
+            if (cell == null)
             {
                 return NotFound();
             }
-            return View(prison);
+            return View(cell);
         }
 
-        // POST: Prisons/Edit/5
+        // POST: Cells/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Number,Capacity,Id,CreationDateTime,UpdatedDateTime")] Prison prison)
+        public async Task<IActionResult> Edit(Guid id, [Bind("CellNumber,Number,Capacity,Id,CreationDateTime,UpdatedDateTime")] Cell cell)
         {
-            if (id != prison.Id)
+            if (id != cell.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace PrisonManagementWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(prison);
+                    _context.Update(cell);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrisonExists(prison.Id))
+                    if (!CellExists(cell.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +114,49 @@ namespace PrisonManagementWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(prison);
+            return View(cell);
         }
 
-        // GET: Prisons/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Cells/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Prisons == null)
+            if (id == null || _context.Cells == null)
             {
                 return NotFound();
             }
 
-            var prison = await _context.Prisons
+            var cell = await _context.Cells
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (prison == null)
+            if (cell == null)
             {
                 return NotFound();
             }
 
-            return View(prison);
+            return View(cell);
         }
 
-        // POST: Prisons/Delete/5
+        // POST: Cells/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Prisons == null)
+            if (_context.Cells == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Prisons'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Cells'  is null.");
             }
-            var prison = await _context.Prisons.FindAsync(id);
-            if (prison != null)
+            var cell = await _context.Cells.FindAsync(id);
+            if (cell != null)
             {
-                _context.Prisons.Remove(prison);
+                _context.Cells.Remove(cell);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PrisonExists(int id)
+        private bool CellExists(Guid id)
         {
-          return _context.Prisons.Any(e => e.Id == id);
+            return _context.Cells.Any(e => e.Id == id);
         }
     }
 }

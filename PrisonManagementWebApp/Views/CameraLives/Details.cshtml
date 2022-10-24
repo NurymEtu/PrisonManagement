@@ -1,4 +1,4 @@
-﻿@model PrisonManagementWebApp.Models.Prison
+﻿@model PrisonManagementWebApp.Models.CameraLive
 
 @{
     ViewData["Title"] = "Details";
@@ -7,26 +7,20 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Prison</h4>
+    <h4>CameraLive</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CamNumber)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.CamNumber)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Number)
+            @Html.DisplayNameFor(model => model.LiveUrl)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capacity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacity)
+            @Html.DisplayFor(model => model.LiveUrl)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreationDateTime)

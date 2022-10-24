@@ -10,85 +10,85 @@ using PrisonManagementWebApp.Models;
 
 namespace PrisonManagementWebApp.Controllers
 {
-    public class SupervisorsController : Controller
+    public class CameraLivesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SupervisorsController(ApplicationDbContext context)
+        public CameraLivesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Supervisors
+        // GET: CameraLives
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Supervisors.ToListAsync());
+              return View(await _context.CameraLives.ToListAsync());
         }
 
-        // GET: Supervisors/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: CameraLives/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Supervisors == null)
+            if (id == null || _context.CameraLives == null)
             {
                 return NotFound();
             }
 
-            var supervisor = await _context.Supervisors
+            var cameraLive = await _context.CameraLives
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (supervisor == null)
+            if (cameraLive == null)
             {
                 return NotFound();
             }
 
-            return View(supervisor);
+            return View(cameraLive);
         }
 
-        // GET: Supervisors/Create
+        // GET: CameraLives/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Supervisors/Create
+        // POST: CameraLives/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Image,Age,Genger,Birthday,Id,CreationDateTime,UpdatedDateTime")] Supervisor supervisor)
+        public async Task<IActionResult> Create([Bind("CamNumber,LiveUrl,Id,CreationDateTime,UpdatedDateTime")] CameraLive cameraLive)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(supervisor);
+                _context.Add(cameraLive);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(supervisor);
+            return View(cameraLive);
         }
 
-        // GET: Supervisors/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: CameraLives/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Supervisors == null)
+            if (id == null || _context.CameraLives == null)
             {
                 return NotFound();
             }
 
-            var supervisor = await _context.Supervisors.FindAsync(id);
-            if (supervisor == null)
+            var cameraLive = await _context.CameraLives.FindAsync(id);
+            if (cameraLive == null)
             {
                 return NotFound();
             }
-            return View(supervisor);
+            return View(cameraLive);
         }
 
-        // POST: Supervisors/Edit/5
+        // POST: CameraLives/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Image,Age,Genger,Birthday,Id,CreationDateTime,UpdatedDateTime")] Supervisor supervisor)
+        public async Task<IActionResult> Edit(Guid id, [Bind("CamNumber,LiveUrl,Id,CreationDateTime,UpdatedDateTime")] CameraLive cameraLive)
         {
-            if (id != supervisor.Id)
+            if (id != cameraLive.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace PrisonManagementWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(supervisor);
+                    _context.Update(cameraLive);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SupervisorExists(supervisor.Id))
+                    if (!CameraLiveExists(cameraLive.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace PrisonManagementWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(supervisor);
+            return View(cameraLive);
         }
 
-        // GET: Supervisors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: CameraLives/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Supervisors == null)
+            if (id == null || _context.CameraLives == null)
             {
                 return NotFound();
             }
 
-            var supervisor = await _context.Supervisors
+            var cameraLive = await _context.CameraLives
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (supervisor == null)
+            if (cameraLive == null)
             {
                 return NotFound();
             }
 
-            return View(supervisor);
+            return View(cameraLive);
         }
 
-        // POST: Supervisors/Delete/5
+        // POST: CameraLives/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Supervisors == null)
+            if (_context.CameraLives == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Supervisors'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.CameraLives'  is null.");
             }
-            var supervisor = await _context.Supervisors.FindAsync(id);
-            if (supervisor != null)
+            var cameraLive = await _context.CameraLives.FindAsync(id);
+            if (cameraLive != null)
             {
-                _context.Supervisors.Remove(supervisor);
+                _context.CameraLives.Remove(cameraLive);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SupervisorExists(int id)
+        private bool CameraLiveExists(Guid id)
         {
-          return _context.Supervisors.Any(e => e.Id == id);
+          return _context.CameraLives.Any(e => e.Id == id);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Prisoners/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Prisoners == null)
             {
@@ -66,7 +66,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Prisoners/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Prisoners == null)
             {
@@ -86,7 +86,7 @@ namespace PrisonManagementWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Age,Genger,Birthday,Image,FingetPrint,ContactName,ContactRelation,ContactContact,TimeServeStarts,TimeServeEnds,CrimeCommitter,CrimeDetails,Id,CreationDateTime,UpdatedDateTime")] Prisoner prisoner)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Age,Genger,Birthday,Image,FingetPrint,ContactName,ContactRelation,ContactContact,TimeServeStarts,TimeServeEnds,CrimeCommitter,CrimeDetails,Id,CreationDateTime,UpdatedDateTime")] Prisoner prisoner)
         {
             if (id != prisoner.Id)
             {
@@ -117,7 +117,7 @@ namespace PrisonManagementWebApp.Controllers
         }
 
         // GET: Prisoners/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Prisoners == null)
             {
@@ -137,7 +137,7 @@ namespace PrisonManagementWebApp.Controllers
         // POST: Prisoners/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Prisoners == null)
             {
@@ -153,7 +153,7 @@ namespace PrisonManagementWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PrisonerExists(int id)
+        private bool PrisonerExists(Guid id)
         {
           return _context.Prisoners.Any(e => e.Id == id);
         }

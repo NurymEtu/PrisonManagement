@@ -1,0 +1,108 @@
+﻿@model PrisonManagementWebApp.Models.Cell
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Камера</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Номер камеры
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CellNumber)
+        </dd>
+
+    </dl>
+    <h4>Камеры</h4>
+    @foreach (var item in Model.CameraLives){
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="@item.LiveUrl"></iframe>
+            <p>@item.CamNumber</p>
+        </div>
+    }
+    <h4>Охранники</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Возраст
+                </th>
+                <th>
+                    Пол
+                </th>
+                <th>
+                    Изображение
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Guards)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @(DateTime.Now.Year - item.Birthday.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genger)
+                    </td>
+                    <td>
+                        <img class="pic2" src="@item.Image">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>Заключенные</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Возраст
+                </th>
+                <th>
+                    Пол
+                </th>
+                <th>
+                    Изображение
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Prisoners)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @(DateTime.Now.Year - item.Birthday.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genger)
+                    </td>
+                    <td>
+                        <img class="pic2" src="@item.Image">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
