@@ -18,7 +18,7 @@ namespace PrisonManagementWebApp.Controllers
         }
         public IActionResult Index()
         {
-        //    DataSeed.Seed(_context);
+            DataSeed.Seed(_context);
             return View();
         }
 
