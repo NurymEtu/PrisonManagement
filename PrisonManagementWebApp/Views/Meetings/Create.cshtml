@@ -18,14 +18,16 @@
                 <span asp-validation-for="MeetingTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreationDateTime" class="control-label"></label>
-                <input asp-for="CreationDateTime" class="form-control" />
-                <span asp-validation-for="CreationDateTime" class="text-danger"></span>
+                <select asp-for="VisitorId"
+                        asp-items="@ViewBag.Visitors">
+                    <option>Please select one</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="UpdatedDateTime" class="control-label"></label>
-                <input asp-for="UpdatedDateTime" class="form-control" />
-                <span asp-validation-for="UpdatedDateTime" class="text-danger"></span>
+                <select asp-for="PrisonerId"
+                        asp-items="@ViewBag.Prisoners">
+                    <option>Please select one</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

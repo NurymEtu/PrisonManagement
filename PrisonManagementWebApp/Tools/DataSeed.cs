@@ -102,6 +102,21 @@ namespace PrisonManagementWebApp.Tools
                 Guards=new List<Guard>{guards[18],guards[19] },
                 CameraLives=new List<CameraLive>{ cams[0] },},
             };
+            var visitors=new List<Visitor>
+            {
+                 new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+                new Visitor{ Genger="Male",Name=GenerateName(RandomNumber())},
+            };
+            context.Visitors.AddRange(visitors);
             context.Cells.AddRange(cellList);
             context.SaveChanges();
         }

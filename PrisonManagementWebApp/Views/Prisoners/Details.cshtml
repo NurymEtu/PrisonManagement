@@ -29,11 +29,10 @@
             @Html.DisplayFor(model => model.Birthday)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
+            <td>
+                <img class="pic2" src="@Model.Image">
+            </td>
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FingetPrint)
         </dt>
@@ -81,18 +80,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CrimeDetails)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreationDateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreationDateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedDateTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedDateTime)
         </dd>
     </dl>
 </div>

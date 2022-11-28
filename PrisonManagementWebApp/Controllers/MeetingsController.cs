@@ -46,6 +46,18 @@ namespace PrisonManagementWebApp.Controllers
         // GET: Meetings/Create
         public IActionResult Create()
         {
+            var prisoners=new  List<SelectListItem>();
+            _context.Prisoners.ToList().ForEach(x =>
+            {
+                prisoners.Add(new SelectListItem { Text=x.Name,Value=x.Id.ToString()});
+            });
+            var visitors = new List<SelectListItem>();
+            _context.Visitors.ToList().ForEach(x =>
+            {
+                visitors.Add(new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+            });
+            ViewBag.Prisoners=prisoners;
+            ViewBag.Visitors= visitors;
             return View();
         }
 
