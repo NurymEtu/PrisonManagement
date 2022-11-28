@@ -66,15 +66,16 @@ namespace PrisonManagementWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MeetingTime,Id,CreationDateTime,UpdatedDateTime")] Meeting meeting)
+        public async Task<IActionResult> Create([Bind("MeetingTime,Id,VisitorId,PrisonerId")] Meeting meeting)
         {
-            if (ModelState.IsValid)
-            {
+            try { 
                 _context.Add(meeting);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(meeting);
+            catch { 
+            return View(meeting); }
+
         }
 
         // GET: Meetings/Edit/5
